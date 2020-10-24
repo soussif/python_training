@@ -13,6 +13,7 @@ if password:
     tn.read_until(b"Password: ")
     tn.write(password.encode('ascii') + b"\n")
 
+# comment
 
 tn.write(b"conf t\n")
 for i in range(2,12):
