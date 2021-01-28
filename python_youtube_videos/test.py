@@ -1,7 +1,6 @@
 # import sys
 # from typing import Counter
-# from useful_tools import Student
-# from useful_tools import SpecialStudent
+
 # import requests
 
 # print(sys.version)
@@ -132,117 +131,6 @@
 # print(student3.special_student())
 
 
-# def greet(who_to_greet):
-#     greeting = 'Hello, {}'.format(who_to_greet)
-#     phrase = "Text"
-#     translation = ""
-#     try:
-#         for letter in phrase:
-#             if letter in "AEIOUaeiou":
-#                 translation = translation + "g"
-#     except ValueError as e:
-#         print("Invalid Input " + e)
-#     except TypeError as e:
-#         print("Invalid Input " + e)
-#     else:
-#         print("everything is fine")
-#     finally:
-#         print("cleanup")
-#     return greeting
-
-
-# import logging
-# import traceback
-
-# try:
-#     a = [1, 2, 3]
-#     value = a[3]
-# except:
-#     logging.error("uncaught exception: %s", traceback.format_exc())
-
 # print(greet(name))
 # r = requests.get('https://coreyms.com')
 # print(r.status_code)
-
-
-# import useful_tools
-# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S')
-# logging.debug('This is a debug message')
-# logging.info('This is an info message')
-# logging.warning('This is a warning message')
-# logging.error('This is an error message')
-# logging.critical('This is a critical message')
-# logger = logging.getLogger(__name__)
-# logger.propagate = False
-# logger.info("hello from logger")
-
-# #json serialisation
-# import json
-# person = {"name:": "John", "age": 30, "city": "New York", "hasChildren": False, "title": ["engineer", "programmer"] }
-
-# personJSON = json.dumps(person, indent=4, sort_keys=True)
-# #print(personJSON)
-# with open('person.json', 'w') as file:
-#     json.dump(person, file) # not json.dumps as 's' is for string
-
-# # json desirealization from object
-# import json
-# person = {"name:": "John", "age": 30, "city": "New York", "hasChildren": False, "title": ["engineer", "programmer"] }
-
-# personJSON = json.dumps(person, indent=4, sort_keys=True)
-# person = json.loads(personJSON)
-# print(person)
-
-# # json desirealization from file
-# import json
-# with open('person.json', 'r') as file:
-#     person = json.load(file)
-# print(person)
-
-# import json
-# class User:
-
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-
-# user = User('Max', 27)
-# def encode_json_user(o):
-#     if isinstance(o, User):
-#         return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
-#     else:
-#         raise TypeError('Onject of tyype User is not JSON serializable')
-
-# userJSON = json.dumps(user, default=encode_json_user)
-# print(userJSON)
-# encode json
-import json
-from json import JSONEncoder
-class UserEncoder(JSONEncoder):
-
-    def default(self, o):
-        if isinstance(o, User):
-            return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
-        return JSONEncoder.default(self, o)
-class User:
-
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-user = User('Max', 27)
-userJSON = UserEncoder().encode(user)
-print(userJSON)
-
-
-#decode json
-
-
-def decode_user(dct):
-    if User.__name__ in dct:
-        return User(name=dct['name'], age=dct['age'])
-    return dct
-
-user = json.loads(userJSON, object_hook=decode_user)
-print(type(user))
-print(user.name)
