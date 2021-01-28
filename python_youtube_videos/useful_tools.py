@@ -22,6 +22,7 @@ logger.addHandler(file_h)
 logger.warning('This is a warning') # logged to the stream
 logger.error('This is an error') # logged to the stream AND the file!
 
+
 class Student:
 
     def __init__(self, name, major, gpa):
@@ -37,5 +38,6 @@ class Student:
 
 
 class SpecialStudent(Student):
+
     def special_student(self):
         return "this student is special"
