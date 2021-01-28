@@ -193,8 +193,56 @@
 # person = json.loads(personJSON)
 # print(person)
 
-# json desirealization from file
+# # json desirealization from file
+# import json
+# with open('person.json', 'r') as file:
+#     person = json.load(file)
+# print(person)
+
+# import json
+# class User:
+
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+
+# user = User('Max', 27)
+# def encode_json_user(o):
+#     if isinstance(o, User):
+#         return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
+#     else:
+#         raise TypeError('Onject of tyype User is not JSON serializable')
+
+# userJSON = json.dumps(user, default=encode_json_user)
+# print(userJSON)
+# encode json
 import json
-with open('person.json', 'r') as file:
-    person = json.load(file)
-print(person)
+from json import JSONEncoder
+class UserEncoder(JSONEncoder):
+
+    def default(self, o):
+        if isinstance(o, User):
+            return {'name': o.name, 'age': o.age, o.__class__.__name__: True}
+        return JSONEncoder.default(self, o)
+class User:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+user = User('Max', 27)
+userJSON = UserEncoder().encode(user)
+print(userJSON)
+
+
+#decode json
+
+
+def decode_user(dct):
+    if User.__name__ in dct:
+        return User(name=dct['name'], age=dct['age'])
+    return dct
+
+user = json.loads(userJSON, object_hook=decode_user)
+print(type(user))
+print(user.name)
