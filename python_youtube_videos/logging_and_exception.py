@@ -1,4 +1,7 @@
 
+import logging
+import traceback
+
 def greet(who_to_greet):
     greeting = 'Hello, {}'.format(who_to_greet)
     phrase = "Text"
@@ -17,8 +20,7 @@ def greet(who_to_greet):
         print("cleanup")
     return greeting
 
-import logging
-import traceback
+
 
 try:
     a = [1, 2, 3]
@@ -30,7 +32,10 @@ except:
 
 
 import useful_tools
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S')
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%m/%d/%Y %H:%M:%S')
 logging.debug('This is a debug message')
 logging.info('This is an info message')
 logging.warning('This is a warning message')
