@@ -22,3 +22,21 @@ print(c_sample)
 
 c_shuffle = random.shuffle(mylist)
 print(c_shuffle)
+
+import secrets
+
+a = secrets.randbelow(10)
+print("10 not included " + a)
+
+a = secrets.randbits(4)
+# 1111 from 1 to 15
+print(a)
+list = list("ABCDEF")
+a = secrets.choice(list)
+
+import numpy as np
+a = np.random.rand(3, 3)
+# 3 * 3random float
+a = np.random.randint(0, 10, (3,4))
+# a 3 * 4
+print(a)

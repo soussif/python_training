@@ -1,5 +1,4 @@
-from useful_tools import Student
-from useful_tools import SpecialStudent
+
 def greet(who_to_greet):
     greeting = 'Hello, {}'.format(who_to_greet)
     phrase = "Text"
