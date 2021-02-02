@@ -32,3 +32,4 @@ def firstn_generator(n):
 
 print(sys.getsizeof(firstn(10000000)))
 print(sys.getsizeof(firstn_generator(10000000)))
+
