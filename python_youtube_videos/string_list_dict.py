@@ -54,14 +54,6 @@ dict = {
 print(dict["Jan"])
 print(dict.get("Mar"))
 
-lambda arguments: expression
-add10 = lambda x: x + 10
-
-def add10_func(x):
-    return x+ 10
-
-print(add10(5))
-mult = lambda x,y: x*y
-print(mult(2,7))
-
-print(greet(name))
+flavor_list = ['vanilla', 'chocolate', 'pecan', 'strawberry']
+for i, flavor in enumerate(flavor_list):
+    print('%d: %s' % (i + 1, flavor))

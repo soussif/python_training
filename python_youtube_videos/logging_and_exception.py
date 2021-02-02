@@ -29,7 +29,17 @@ except:
     logging.error("uncaught exception: %s", traceback.format_exc())
 
 
+name = 'Faek'
+lambda arguments: expression
+add10 = lambda x: x + 10
 
+def add10_func(x):
+    return x+ 10
+print(add10(5))
+mult = lambda x,y: x*y
+print(mult(2,7))
+
+print(greet(name))
 
 import useful_tools
 logging.basicConfig(
