@@ -2,6 +2,7 @@ import json
 import time
 from sqlalchemy import create_engine, Table, Column, Float, String, MetaData
 
+
 class OpenDatabase:
 
     def __init__(self, db_url, seed_path):
@@ -10,8 +11,7 @@ class OpenDatabase:
         for _ in range(10):
             try:
                 self.engine = create_engine(db_url)
-                self.meta = MetataData(self.engine)
-
+                self.meta = MetaData(self.engine)
                 # create table accounts
                 self.table = Table(
                     "account",
@@ -20,24 +20,25 @@ class OpenDatabase:
                     Column("paid", Float, nullable=False),
                     Column("due", Float, nullable=False)
                 )
-
-                #connect to the DB and see if it works
+                # connect to the DB and see if it works
                 self.meta.create_all()
                 self.connect()
                 break
+
             except:
                 time.sleep(5)
-        
-        # if conn attr doesnt exist or is closed raise error
+
+        # if conn attr does not exist or is closed raise error
         if not hasattr(self, "conn") or self.conn.closed:
             raise TimeoutError("Could not establish session to mysql db")
-        
-        # use json data to seed the dtababase
-        # note json has been converted from a dict into a list of 3 dict to make it easier to consume by sqlalchemy
+
+        # use json data to seed the dababase
+        # note json has been converted from a dict into
+        # a list of 3 dict to make it easier to consume by sqlalchemy
         with open(seed_path, "r") as handle:
             data = json.load(handle)
 
-        self.result = self.conn.excecute(self.table.insert(), data)
+        self.result = self.conn.execute(self.table.insert(), data)
         self.disconnect()
 
     def connect(self):
@@ -50,9 +51,10 @@ class OpenDatabase:
             self.conn.close()
             if not self.conn.closed:
                 raise OSError("close() succeeded but session is still open")
+
     def balance(self, acct_id):
         select_acct = self.table.select().where(
-            self.table.c.acctid == acct_id.uppper()
+            self.table.c.acctid == acct_id.upper()
         )
         result = self.conn.execute(select_acct)
         acct = result.fetchone()
@@ -61,5 +63,3 @@ class OpenDatabase:
             return f"{bal:.2f} USD"
 
         return None
-
-            
