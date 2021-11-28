@@ -25,7 +25,7 @@ db = Database("mysql://root:faekpass123@db/db", "data/initial.json")
 @app.before_request
 def before_request():
     db.connect()
-    app.logger.debug("connect to DB")
+    app.logger.debug("Connect to DB")
 
 
 @app.after_request
@@ -67,4 +67,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, use_reloader=False)
+    ctx = ("ssl/cert.pem", "ssl/key.pem")
+    app.run(host="0.0.0.0", debug=True, use_reloader=False, ssl_context=ctx)
