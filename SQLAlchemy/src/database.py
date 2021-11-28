@@ -3,7 +3,7 @@ import time
 from sqlalchemy import create_engine, Table, Column, Float, String, MetaData
 
 
-class OpenDatabase:
+class Database:
 
     def __init__(self, db_url, seed_path):
 
@@ -18,7 +18,7 @@ class OpenDatabase:
                     self.meta,
                     Column("acctid", String(15), primary_key=True),
                     Column("paid", Float, nullable=False),
-                    Column("due", Float, nullable=False)
+                    Column("due", Float, nullable=False),
                 )
                 # connect to the DB and see if it works
                 self.meta.create_all()
@@ -47,7 +47,8 @@ class OpenDatabase:
             raise OSError("connect() succeed but session is still closed")
 
     def disconnect(self):
-        if hasattr(self, "conn") and not self.conn.closed:
+        # hasattr(self, "conn") and
+        if not self.conn.closed:
             self.conn.close()
             if not self.conn.closed:
                 raise OSError("close() succeeded but session is still open")

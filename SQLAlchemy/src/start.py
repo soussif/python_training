@@ -19,7 +19,7 @@ app = Flask(__name__)
 # path = "data/db.xml"
 path = "data/db.json"
 # db = Database(path)
-db = Database("mysql://root:globalmantics@db/db", "data/initial.json")
+db = Database("mysql://root:faekpass123@db/db", "data/initial.json")
 
 
 @app.before_request
@@ -29,10 +29,10 @@ def before_request():
 
 
 @app.after_request
-def after_request():
+def after_request(response):
     db.disconnect()
     app.logger.debug("Disconnect from DB")
-    return Response
+    return response
 
 
 @app.route("/", methods=["GET", "POST"])

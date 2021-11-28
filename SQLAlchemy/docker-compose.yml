@@ -11,12 +11,12 @@ services:
     build: "."
     image: "flask:latest"
     ports:
-      - "5000:5000/tcp"
+      - "5001:5000/tcp"
 
   db:
     image: "mysql:latest"
     command: "--default-authentication-plugin=mysql_native_password"
     environment:
-      MYSQL_ROOT_PASSWORD: "globomantics"
+      MYSQL_ROOT_PASSWORD: "faekpass123"
       MYSQL_DATABASE: "db"
 ...
