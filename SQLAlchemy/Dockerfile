@@ -2,14 +2,17 @@
 # version we used for our development. Alpine Linux is a minimal
 # distribution and is popular for containerized apps.
 FROM python:3.7.3-alpine
-LABEL maintainer="njrusmc@gmail.com"
+LABEL maintainer="soussif@gmail.com"
 
 # Shell commands to execute after basic Python 3.7 container
 # is deployed. We only need to install flash for this app.
-RUN pip install flask
+RUN apk add --no-cache mariadb-dev build-base && \
+    pip install flask SQLAlchemy mysqlclient
 
 # Change into the correct directory. WORKDIR is the Docker best practice
 # versus "RUN cd /src" as it is cleaner and more explicit.
+COPY src /src
+
 WORKDIR /src
 
 # Flash default HTTP port is TCP 5000 in the CRM app. This doesn't actually
